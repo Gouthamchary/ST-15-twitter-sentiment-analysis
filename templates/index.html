@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Sentiment Analysis - Airlines</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1DA1F2, #14171A);
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3em;
+            animation: fadeInDown 1.5s ease-in-out, glow 2s infinite alternate;
+        }
+
+        p {
+            font-size: 1.2em;
+            max-width: 600px;
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        .predict-btn {
+            background-color: #1DA1F2;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: bounce 2s infinite;
+            box-shadow: 0 0 20px rgba(29, 161, 242, 0.8);
+        }
+
+        .predict-btn:hover {
+            transform: scale(1.1);
+            background-color: #0d8bdc;
+            box-shadow: 0 0 30px rgba(29, 161, 242, 1);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #1DA1F2, 0 0 20px #1DA1F2; }
+            to { text-shadow: 0 0 20px #1DA1F2, 0 0 30px #1DA1F2; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .airplane {
+            position: absolute;
+            width: 50px;
+            animation: flyAcross 10s linear infinite;
+            filter: drop-shadow(0 0 10px white);
+        }
+
+        @keyframes flyAcross {
+            from { transform: translateX(-100px) translateY(0) rotate(10deg); }
+            to { transform: translateX(110vw) translateY(-50px) rotate(10deg); }
+        }
+
+        .twinkle {
+            position: absolute;
+            background: white;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation">
+        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 20%; animation-delay: 0s;">
+        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 50%; animation-delay: 3s;">
+        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 80%; animation-delay: 6s;">
+        
+        <!-- Twinkling stars -->
+        <div class="twinkle" style="top: 10%; left: 20%; animation-delay: 1s;"></div>
+        <div class="twinkle" style="top: 30%; left: 70%; animation-delay: 2s;"></div>
+        <div class="twinkle" style="top: 50%; left: 40%; animation-delay: 0.5s;"></div>
+        <div class="twinkle" style="top: 80%; left: 90%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <div class="container">
+        <h1>Twitter Sentiment Analysis</h1>
+        <p>Explore real-time insights on airline sentiments derived from Twitter data. Discover passenger opinions and predict future trends.</p>
+        <button class="predict-btn">Predict Sentiment</button>
+    </div>
+</body>
+
+</html>
