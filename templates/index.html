@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1DA1F2, #14171A);
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             color: white;
             overflow: hidden;
         }
@@ -23,7 +23,7 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            animation: slideIn 2s ease-in-out;
+            animation: zoomIn 2s ease-in-out;
         }
 
         h1 {
@@ -46,12 +46,12 @@
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.3s ease, background-color 0.3s ease;
-            animation: bounce 2s infinite;
+            animation: heartbeat 1.5s infinite;
             box-shadow: 0 0 20px rgba(29, 161, 242, 0.8);
         }
 
         .predict-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
             background-color: #0d8bdc;
             box-shadow: 0 0 30px rgba(29, 161, 242, 1);
         }
@@ -66,19 +66,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         @keyframes glow {
             from { text-shadow: 0 0 10px #1DA1F2, 0 0 20px #1DA1F2; }
-            to { text-shadow: 0 0 20px #1DA1F2, 0 0 30px #1DA1F2; }
+            to { text-shadow: 0 0 20px #1DA1F2, 0 0 40px #1DA1F2; }
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .background-animation {
@@ -89,47 +89,43 @@
             height: 100%;
             pointer-events: none;
             overflow: hidden;
+            background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
         }
 
         .airplane {
             position: absolute;
-            width: 50px;
-            animation: flyAcross 10s linear infinite;
+            width: 60px;
+            animation: flyAcross 8s linear infinite;
             filter: drop-shadow(0 0 10px white);
         }
 
         @keyframes flyAcross {
-            from { transform: translateX(-100px) translateY(0) rotate(10deg); }
+            from { transform: translateX(-150px) translateY(0) rotate(10deg); }
             to { transform: translateX(110vw) translateY(-50px) rotate(10deg); }
         }
 
-        .twinkle {
+        .floating-cloud {
             position: absolute;
-            background: white;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out;
+            width: 150px;
+            opacity: 0.8;
+            animation: floatClouds 20s linear infinite;
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
+        @keyframes floatClouds {
+            from { transform: translateX(-200px); }
+            to { transform: translateX(110vw); }
         }
     </style>
 </head>
 
 <body>
     <div class="background-animation">
-        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 20%; animation-delay: 0s;">
-        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 50%; animation-delay: 3s;">
-        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 80%; animation-delay: 6s;">
-        
-        <!-- Twinkling stars -->
-        <div class="twinkle" style="top: 10%; left: 20%; animation-delay: 1s;"></div>
-        <div class="twinkle" style="top: 30%; left: 70%; animation-delay: 2s;"></div>
-        <div class="twinkle" style="top: 50%; left: 40%; animation-delay: 0.5s;"></div>
-        <div class="twinkle" style="top: 80%; left: 90%; animation-delay: 1.5s;"></div>
+        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 30%; animation-delay: 0s;">
+        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 60%; animation-delay: 3s;">
+
+        <!-- Floating Clouds -->
+        <img src="https://www.svgrepo.com/show/30691/cloud.svg" class="floating-cloud" style="top: 10%; animation-delay: 1s;">
+        <img src="https://www.svgrepo.com/show/30691/cloud.svg" class="floating-cloud" style="top: 50%; animation-delay: 4s;">
     </div>
 
     <div class="container">
