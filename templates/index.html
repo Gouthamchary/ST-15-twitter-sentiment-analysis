@@ -1,142 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter Sentiment Analysis - Airlines</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1DA1F2, #14171A);
-            color: white;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitter Sentiment Analysis</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            animation: slideIn 2s ease-in-out;
-        }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #15202B; /* Twitter-like dark theme */
+      color: #FFFFFF;
+      overflow-x: hidden;
+    }
 
-        h1 {
-            font-size: 3em;
-            animation: fadeInDown 1.5s ease-in-out, glow 2s infinite alternate;
-        }
+    /* Header Section */
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #1DA1F2; /* Twitter blue */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        p {
-            font-size: 1.2em;
-            max-width: 600px;
-            animation: fadeInUp 2s ease-in-out;
-        }
+    header h1 {
+      font-size: 2.5rem;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        .predict-btn {
-            background-color: #1DA1F2;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1.5em;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            animation: bounce 2s infinite;
-            box-shadow: 0 0 20px rgba(29, 161, 242, 0.8);
-        }
+    /* Main Content Section */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      padding: 20px;
+    }
 
-        .predict-btn:hover {
-            transform: scale(1.1);
-            background-color: #0d8bdc;
-            box-shadow: 0 0 30px rgba(29, 161, 242, 1);
-        }
+    /* Animated Background */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle, #1dc4f2, #15202B);
+      animation: pulse 10s infinite alternate;
+    }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* Predict Sentiment Button */
+    .predict-button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      color: #FFFFFF;
+      background-color: #f22b1d;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: float 3s ease-in-out infinite;
+    }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .predict-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+    /* Information Section */
+    .info-section {
+      margin-top: 40px;
+      text-align: center;
+      max-width: 800px;
+      animation: slideIn 1.5s ease-in-out;
+    }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #1DA1F2, 0 0 20px #1DA1F2; }
-            to { text-shadow: 0 0 20px #1DA1F2, 0 0 30px #1DA1F2; }
-        }
+    .info-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1DA1F2;
+    }
 
-        @keyframes slideIn {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+    .info-section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #E1E8ED;
+    }
 
-        .background-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        .airplane {
-            position: absolute;
-            width: 50px;
-            animation: flyAcross 10s linear infinite;
-            filter: drop-shadow(0 0 10px white);
-        }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
 
-        @keyframes flyAcross {
-            from { transform: translateX(-100px) translateY(0) rotate(10deg); }
-            to { transform: translateX(110vw) translateY(-50px) rotate(10deg); }
-        }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-        .twinkle {
-            position: absolute;
-            background: white;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-    </style>
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="background-animation">
-        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 20%; animation-delay: 0s;">
-        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 50%; animation-delay: 3s;">
-        <img src="https://www.svgrepo.com/show/11662/airplane.svg" class="airplane" style="top: 80%; animation-delay: 6s;">
-        
-        <!-- Twinkling stars -->
-        <div class="twinkle" style="top: 10%; left: 20%; animation-delay: 1s;"></div>
-        <div class="twinkle" style="top: 30%; left: 70%; animation-delay: 2s;"></div>
-        <div class="twinkle" style="top: 50%; left: 40%; animation-delay: 0.5s;"></div>
-        <div class="twinkle" style="top: 80%; left: 90%; animation-delay: 1.5s;"></div>
-    </div>
+  <!-- Background Animation -->
+  <div class="background"></div>
 
-    <div class="container">
-        <h1>Twitter Sentiment Analysis</h1>
-        <p>Explore real-time insights on airline sentiments derived from Twitter data. Discover passenger opinions and predict future trends.</p>
-        <button class="predict-btn">Predict Sentiment</button>
+  <!-- Header -->
+  <header>
+    <h1>Twitter Sentiment Analysis</h1>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Predict Sentiment Button -->
+    <button class="predict-button" onclick="predictSentiment()">Predict Sentiment</button>
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h2>About Twitter Sentiment Analysis</h2>
+      <p>
+        Twitter Sentiment Analysis is the process of determining the emotional tone behind a series of tweets. 
+        Using advanced Natural Language Processing (NLP) techniques, we analyze tweets to classify them as 
+        positive, negative, or neutral. This tool helps businesses and individuals understand public opinion 
+        and trends on Twitter in real-time.
+      </p>
     </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function predictSentiment() {
+      // Redirect to the /predict route
+      window.location.href = "/predict";
+    }
+  </script>
 </body>
-
 </html>
