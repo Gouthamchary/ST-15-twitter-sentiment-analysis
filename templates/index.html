@@ -10,7 +10,7 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            background: linear-gradient(135deg, #04ae59, #2575fc);
+            background: linear-gradient(135deg, #0be879, #093889);
             font-family: 'Times New Roman', Times, serif;
             color: #fff;
             overflow: hidden;
@@ -37,7 +37,7 @@
             max-width: 800px;
             margin: 0 auto 30px;
             line-height: 1.5;
-            background: rgba(21, 203, 231, 0.8);
+            background: rgba(5, 169, 158, 0.8);
             padding: 20px;
             border-radius: 10px;
         }
@@ -102,9 +102,9 @@
 <body>
     <div class="floating-icons">
         <div class="icon" style="left: 10%; animation-duration: 10s;"></div>
-        <div class="icon" style="left: 30%; animation-duration: 12s; animation-delay: 1s;"></div>
-        <div class="icon" style="left: 50%; animation-duration: 10s; animation-delay: 2s;"></div>
-        <div class="icon" style="left: 70%; animation-duration: 14s; animation-delay: 3s;"></div>
+        <div class="icon" style="left: 30%; animation-duration: 12s; animation-delay: 5s;"></div>
+        <div class="icon" style="left: 50%; animation-duration: 10s; animation-delay: 8s;"></div>
+        <div class="icon" style="left: 70%; animation-duration: 14s; animation-delay: 5s;"></div>
         <div class="icon" style="left: 90%; animation-duration: 15s; animation-delay: 4s;"></div>
     </div>
 
@@ -116,7 +116,7 @@
 
     <script>
         document.getElementById('predictBtn').addEventListener('click', function() {
-            alert('Redirecting to Sentiment Prediction Page...');
+            window.location.href = "/predict";
         });
     </script>
 </body>
