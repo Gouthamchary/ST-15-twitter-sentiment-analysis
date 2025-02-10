@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Twitter Sentiment Analysis</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
-    /* General Reset */
     * {
       margin: 0;
       padding: 0;
@@ -14,139 +12,100 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #15202B; /* Twitter-like dark theme */
-      color: #FFFFFF;
-      overflow-x: hidden;
+      font-family: 'Arial', sans-serif;
+      background-color: #e5f4fd;
+      color: #1DA1F2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
     }
 
-    /* Header Section */
-    header {
+    .container {
       text-align: center;
-      padding: 20px;
-      background-color: #1DA1F2; /* Twitter blue */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    header h1 {
-      font-size: 2.5rem;
       animation: fadeIn 2s ease-in-out;
     }
 
-    /* Main Content Section */
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 80vh;
-      padding: 20px;
-    }
-
-    /* Animated Background */
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle, #1DA1F2, #15202B);
-      animation: pulse 10s infinite alternate;
-    }
-
-    /* Predict Sentiment Button */
-    .predict-button {
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      color: #FFFFFF;
-      background-color: #1DA1F2;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .predict-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Information Section */
-    .info-section {
-      margin-top: 40px;
-      text-align: center;
-      max-width: 800px;
-      animation: slideIn 1.5s ease-in-out;
-    }
-
-    .info-section h2 {
-      font-size: 2rem;
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
       margin-bottom: 20px;
-      color: #1DA1F2;
     }
 
-    .info-section p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #E1E8ED;
+    p {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 500px;
+      margin: 0 auto 30px;
     }
 
-    /* Animations */
+    .predict-btn {
+      background-color: #1DA1F2;
+      color: white;
+      font-size: 1.2rem;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .predict-btn:hover {
+      background-color: #187bcd;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.05); }
+    /* Animation for floating tweets */
+    .floating-tweet {
+      position: absolute;
+      background-color: white;
+      color: #1DA1F2;
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      animation: floatUp 5s infinite ease-in-out;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100px);
+        opacity: 0.2;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px);
+        opacity: 0.2;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Background Animation -->
-  <div class="background"></div>
-
-  <!-- Header -->
-  <header>
-    <h1>Twitter Sentiment Analysis</h1>
-  </header>
-
-  <!-- Main Content -->
   <div class="container">
-    <!-- Predict Sentiment Button -->
-    <button class="predict-button" onclick="predictSentiment()">Predict Sentiment</button>
-
-    <!-- Information Section -->
-    <div class="info-section">
-      <h2>About Twitter Sentiment Analysis</h2>
-      <p>
-        Twitter Sentiment Analysis is the process of determining the emotional tone behind a series of tweets. 
-        Using advanced Natural Language Processing (NLP) techniques, we analyze tweets to classify them as 
-        positive, negative, or neutral. This tool helps businesses and individuals understand public opinion 
-        and trends on Twitter in real-time.
-      </p>
-    </div>
+    <h1>Twitter Sentiment Analysis</h1>
+    <p>Analyze and understand sentiments from tweets in real-time. Get insights and trends about opinions on the most popular platform.</p>
+    <button class="predict-btn" onclick="redirectToPredict()">Predict Sentiment</button>
   </div>
 
-  <!-- JavaScript -->
+  <!-- Floating tweet animations -->
+  <div class="floating-tweet" style="top: 10%; left: 15%;">"Twitter is amazing!"</div>
+  <div class="floating-tweet" style="top: 30%; right: 20%;">"Not sure about this update..."</div>
+  <div class="floating-tweet" style="bottom: 25%; left: 10%;">"Loving the positive vibes!"</div>
+
   <script>
-    function predictSentiment() {
-      alert("Redirecting to Sentiment Prediction Page...");
-      // Add your logic to redirect or handle the prediction
+    function redirectToPredict() {
+      window.location.href = "/predict";
     }
   </script>
 </body>
